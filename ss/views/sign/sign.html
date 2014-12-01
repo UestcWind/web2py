@@ -1,4 +1,5 @@
 {{extend 'layout.html'}}
+
 <script type="text/javascript"><!--
     // These variables are used by the web2py_ajax_init function in web2py_ajax.js (which is loaded below).
     var w2p_ajax_confirm_message = "{{=T('Are you sure you want to delete this object?')}}";
@@ -24,20 +25,23 @@ response.include_files()
 		<tr>
 			<td>成员名</td>
 			<td>到了吗</td>
-			<td>到达时间 / 缺席原因</td>
+			<td>到达时间</td>
+			<td>缺席原因</td>
 		</tr>
 		<form id='sign_form' method="post">
 		<input type='hidden' name="time" value={{=time}} />
 		<tr>
 			<input type='hidden' name="wu" value="吴旭" />
 			<td>吴</td>			
-			<td>
+			<td style="width:200px">
 				<input name="status_wu" id="status_wu1" type="radio" value="0"  /> 到了
 				<input name="status_wu" id="status_wu2" type="radio" value="1" /> 没到 
 			</td>
 			<td>
-				<input type='text' name="time_wu"   value='' />
-				<input type='text' name="abs_wu"  value='' />
+				<input type='text' name="time_wu" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_wu" style="width:200px"  value='' />
 			</td>
 		</tr>
 		<tr>
@@ -45,7 +49,13 @@ response.include_files()
 			<td>罗</td>
 			<td>
 				<input name="status_luo" type="radio" value="0" /> 到了
-				<input name="status_luo" type="radio" value="1" checked="checked"/> 没到 
+				<input name="status_luo" type="radio" value="1"/> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_luo" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_luo" style="width:200px"  value='' />
 			</td>
 		</tr>
 		<tr>
@@ -53,31 +63,55 @@ response.include_files()
 			<td>刘</td>
 			<td>
 				<input name="status_liu" type="radio" value="0" /> 到了
-				<input name="status_liu" type="radio" value="1" checked="checked"/> 没到 
+				<input name="status_liu" type="radio" value="1"/> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_liu" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_liu" style="width:200px"  value='' />
 			</td>
 		</tr>
 		<tr>
 		<input type='hidden' name="yao" value="姚润程" />
 			<td>姚</td>
 			<td>
-				<input name="status_yao" type="radio" value="0" checked="checked"/> 到了
+				<input name="status_yao" type="radio" value="0"/> 到了
 				<input name="status_yao" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_yao" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_yao" style="width:200px"  value='' />
 			</td>
 		</tr>
 		<tr>
 		<input type='hidden' name="long" value="龙吉源" />
 			<td>龙</td>
 			<td>
-				<input name="status_long1" type="radio" value="0" checked="checked"/> 到了
+				<input name="status_long1" type="radio" value="0"/> 到了
 				<input name="status_long1" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_long" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_long" style="width:200px"  value='' />
 			</td>
 		</tr>
 		<tr>
 		<input type='hidden' name="xue" value="薛承怡" />
 			<td>薛</td>
 			<td>
-				<input name="status_xue" type="radio" value="0" checked="checked" /> 到了
+				<input name="status_xue" type="radio" value="0" /> 到了
 				<input name="status_xue" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_xue" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_xue" style="width:200px"  value='' />
 			</td>
 		</tr>
 		<tr >
@@ -91,82 +125,10 @@ response.include_files()
 <div id='show'></div>
 
 <script>
-function getMemberStatus(){
-	var data=new Object();
-	var wu=new Object();
-	var check_wu=document.getElementsByName('status_wu');
-	wu.name=document.getElementById('吴旭').value;
-	for(var i=0;i<check_wu.length;i++){
-		if(check_wu[i].checked==true){
-		  wu.status=check_wu[i].value;
-		  break;
-		}
- 	}
- 	data['wu']=wu;
- 	var luo=new Object();
-	var check_luo=document.getElementsByName('status_luo');
-	luo.name=document.getElementById('罗赛').value;
-	for(i=0;i<check_luo.length;i++){
-		if(check_luo[i].checked==true){
-		  luo.status=check_luo[i].value;
-		  break;
-		}
- 	}
- 	data['luo']=luo;
- 	var liu=new Object();
-	var check_liu=document.getElementsByName('status_liu');
-	liu.name=document.getElementById('刘文昭').value;
-	for(i=0;i<check_liu.length;i++){
-		if(check_liu[i].checked==true){
-		  liu.status=check_liu[i].value;
-		  break;
-		}
- 	}
- 	data['liu']=liu;
- 	var yao=new Object();
-	var check_yao=document.getElementsByName('status_yao');
-	yao.name=document.getElementById('姚润程').value;
-	for(i=0;i<check_yao.length;i++){
-		if(check_yao[i].checked==true){
-		  yao.status=check_yao[i].value;
-		  break;
-		}
- 	}
- 	data['yao']=yao;
- 	var long1=new Object();
-	var check_long1=document.getElementsByName('status_long1');
-	long1.name=document.getElementById('龙吉源').value;
-	for(i=0;i<check_long1.length;i++){
-		if(check_long1[i].checked==true){
-		  long1.status=check_long1[i].value;
-		  break;
-		}
- 	}
- 	data['long1']=long1;
- 	var xue=new Object();
-	var check_xue=document.getElementsByName('status_xue');
-	xue.name=document.getElementById('薛承怡').value;
-	for(i=0;i<check_xue.length;i++){
-		if(check_xue[i].checked==true){
-		  xue.status=check_xue[i].value;
-		  break;
-		}
- 	}
- 	data['xue']=xue;
-}
-jQuery(document).ready(function(){
-   if(jQuery('#status_wu1').prop('checked'))
-        jQuery('#time_wu').show();
-   else jQuery('#abs_wu').hide();
-   jQuery('#status_wu1').change(function(){
-        if(jQuery('#status_wu1').prop('checked'))
-            jQuery('#time_wu').show();
-        else jQuery('#abs_wu').hide();});
-});
 jQuery('#sign_form').submit(function() {
   ajax('{{=URL('commit')}}',
-       ['time','wu','luo','liu','yao','long','xue','status_liu','status_wu','status_luo','status_yao','status_long1','status_xue'], 'show');
+       ['time','wu','luo','liu','yao','long','xue','status_liu','status_wu','status_luo','status_yao','status_long1','status_xue','time_xue','abs_xue','time_wu','abs_wu','time_luo','abs_luo','time_liu','abs_liu','time_yao','abs_yao','time_long','abs_long'], 'show');
   return false;
 });
 </script>
-{{=BEAUTIFY(response._vars)}}
+<h5>{{=XML(T('%s', A('查看过去签到情况',_href=URL('ss','sign','show.html'))))}}</h5>
