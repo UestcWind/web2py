@@ -1,0 +1,12 @@
+[2014-11-27 10:33:09] START
+[2014-11-27 13:52:08] CREATE sign.py: 0
+[2014-11-27 13:52:24] CREATE show.py: 0
+[2014-11-27 13:53:03] CREATE sign/index.html: 0
+[2014-11-27 13:54:35] CREATE show/index.html: 0
+[2014-11-27 14:17:06] DELETE ss/controllers/sign.py: -1
+[2014-11-27 14:17:40] DELETE ss/controllers/show.py: -1
+[2014-11-27 14:17:50] DELETE ss/views/sign/index.html: -3
+[2014-11-27 14:17:59] DELETE ss/views/show/index.html: -3
+[2014-11-27 14:18:27] CREATE sign.py: 0
+[2014-11-27 14:18:54] CREATE sign/sign.html: 0
+[2014-11-27 14:19:07] CREATE sign/show.html: 0

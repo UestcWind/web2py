@@ -1,0 +1,150 @@
+timestamp: 2014-11-27T10:34:06.243000
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2014-11-27T10:34:06.271000
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-11-27T10:34:06.289000
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-11-27T10:34:06.367000
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-11-27T10:34:06.397000
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-11-27T10:34:06.423000
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2014-11-27T13:45:18.951000
+CREATE TABLE signing(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512) NOT NULL,
+    isComing CHAR(1),
+    comingTime TIMESTAMP,
+    today DATE NOT NULL,
+    absentReason TEXT
+);
+success!
+success!
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+success!
+DELETE FROM signing;
+DELETE FROM sqlite_sequence WHERE name='signing';
+success!
+timestamp: 2014-11-30T23:35:46.333000
+CREATE TABLE signin(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512),
+    isComing CHAR(512),
+    comingTime CHAR(512),
+    today CHAR(512),
+    absentReason TEXT
+);
+success!
