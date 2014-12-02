@@ -16,6 +16,9 @@ response.files.insert(3,URL('static','js/web2py.js'))
 response.include_meta()
 response.include_files()
 }}
+{{if 'warning' in globals():}}
+<h2>{{=warning}}</h2>
+{{else:}}
 <h1>Let's start to sign for today</h1>
 <br />
 <h4>Today is:{{=time}}</h4>
@@ -115,7 +118,7 @@ response.include_files()
 			</td>
 		</tr>
 		<tr >
-			<td colspan="2">
+			<td colspan="4">
 				<input type='submit'  value="提交今日签到" />
 			</td>
 		</tr>
@@ -130,5 +133,6 @@ jQuery('#sign_form').submit(function() {
        ['time','wu','luo','liu','yao','long','xue','status_liu','status_wu','status_luo','status_yao','status_long1','status_xue','time_xue','abs_xue','time_wu','abs_wu','time_luo','abs_luo','time_liu','abs_liu','time_yao','abs_yao','time_long','abs_long'], 'show');
   return false;
 });
+{{pass}}
 </script>
 <h5>{{=XML(T('%s', A('查看过去签到情况',_href=URL('ss','sign','show.html'))))}}</h5>

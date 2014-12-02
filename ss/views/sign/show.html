@@ -15,7 +15,6 @@ response.files.insert(3,URL('static','js/web2py.js'))
 response.include_meta()
 response.include_files()
 }}
-
 <form id='time' method="post">
 <input type='text' name="today"  value='' />
 <input type='submit'  value="查看" />
@@ -24,11 +23,11 @@ response.include_files()
 
 <script>
 jQuery('#time').submit(function() {
-  ajax('{{=URL('show')}}',
+  ajax('{{=URL('show_')}}',
        ['today'], 'show_sign');
   return false;
 });
 </script>
 
-
-{{=BEAUTIFY(response._vars)}}
+{{=XML(T('%s', A('回到签到界面',_href=URL('ss','sign','sign.html'))))}}
+<!--{{=BEAUTIFY(response._vars)}}-->

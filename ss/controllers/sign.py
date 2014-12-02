@@ -5,8 +5,9 @@ def index(): return dict(message="hello from sign.py")
 def sign():
 	import time
 	today=time.strftime("%Y-%m-%d", time.localtime())
-	if request.vars.status_wu:
-		return dict(time=today,result=request.vars.status_wu)
+	rows = db(db.signin.today==today).select()
+	if  rows:
+		return dict(time=today,warning='今天的签到工作已经圆满完成~')
 	else:
 		return dict(time=today)
 
@@ -43,27 +44,29 @@ def commit():
 			return '记录成功'	
 		except:				
 			return '记录失败'		
-def show():
-	today=request.vars.time
-	rows = db(db.signin.today==request.vars.time).select()
-	str1=dict()
-	str2='<table border="1" width="500" height="400"><tr><td>成员名</td><td>到了吗</td><td>到达时间</td><td>缺席原因</td</tr>'
-	i=0
-	for row in rows:
-		str2
-		str1[i]['name']=row.name
-		if row.isComing=='0':
-			str1[i]['isComing']='来了'
-		else:
-			str1[i]['isComing']='来了'
-		str1[i]['name']=row.name
-		str1[i]['name']=row.name
-		str1[i]['name']=row.name
-		str1[i]['name']=row.name
-		str1[i]['name']=row.name
-    	print row.myfield
 
-	return dict(message=rows[0].name)			
+def show():
+	return  dict(link='sign.html')
+def show_():
+	today=request.vars.today
+	rows = db(db.signin.today==today).select()
+	if not rows:
+		return '<span style="font-size:20px;color:red">"'+today+'"'+'格式不正确,或者这天是周末神马的</span>'
+	str2=('<table border="1" width="500" height="400"><tr ><td colspan="4"><span style="font-size:25px;font-weight:bold" >'
+		+today+'的签到情况'
+		+'</span></td></tr><tr><td style="font-size:20px;font-weight:bold">成员名</td><td style="font-size:20px;font-weight:bold">'
+		'到了吗</td><td style="font-size:20px;font-weight:bold">到达时间</td><td style="font-size:20px;font-weight:bold">缺席原因</td</tr>')
+	for row in rows:
+		str2+='<tr>'
+		str2+='<td>'+row.name+'</td>'
+		if row.isComing=='0':
+			str1='来了'
+		else:
+			str1='没来'
+		str2+='<td>'+str1+'</td>'	
+		str2+='<td>'+row.comingTime+'</td>'
+		str2+='<td>'+row.absentReason+'</td></tr>'
+	return 	str2	
 def ajax():
 	return dict(message="hello from sign.py")
 #def commit_sign():
