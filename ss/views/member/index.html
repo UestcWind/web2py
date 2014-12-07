@@ -1,0 +1,19 @@
+{{extend 'layout.html'}}
+
+{{if 'warning' in globals():}}
+<h2>{{=warning}}</h2>
+{{else:}}
+<h1>公司人员资料</h1>
+<br />
+<table>
+{{for record in records:}}
+<tr>
+<td>{{=record.name}}</td>
+<td>{{=IMG(_src=URL('download',args=record.avatar),_width='150px')}}</td>
+<td>{{=A('编辑',_href=URL('edit',args=record.id))}}</td>
+</tr>
+{{pass}}
+{{pass}}
+</table>
+<hr />
+<h4>{{=XML(T('%s', A('添加新人员',_href=URL('ss','member','create.html'))))}}</h4>

@@ -1,0 +1,138 @@
+{{extend 'layout.html'}}
+
+<script type="text/javascript"><!--
+    // These variables are used by the web2py_ajax_init function in web2py_ajax.js (which is loaded below).
+    var w2p_ajax_confirm_message = "{{=T('Are you sure you want to delete this object?')}}";
+    var w2p_ajax_disable_with_message = "{{=T('Working...')}}";
+    var w2p_ajax_date_format = "{{=T('%Y-%m-%d')}}";
+    var w2p_ajax_datetime_format = "{{=T('%Y-%m-%d %H:%M:%S')}}";
+    var ajax_error_500 = '{{=T.M('An error occured, please [[reload %s]] the page') % URL(args=request.args, vars=request.get_vars) }}'
+    //--></script>
+{{
+response.files.insert(0,URL('static','js/jquery.js'))
+response.files.insert(1,URL('static','css/calendar.css'))
+response.files.insert(2,URL('static','js/calendar.js'))
+response.files.insert(3,URL('static','js/web2py.js'))
+response.include_meta()
+response.include_files()
+}}
+{{if 'warning' in globals():}}
+<h2>{{=warning}}</h2>
+{{else:}}
+<h1>Let's start to sign in for today</h1>
+<br />
+<h4>Today is:{{=time}}</h4>
+<hr />
+<div id='member_list'>
+	<table border="1" width="500" height="400">
+		<tr>
+			<td>成员名</td>
+			<td>到了吗</td>
+			<td>到达时间</td>
+			<td>缺席原因</td>
+		</tr>
+		<form id='sign_form' method="post">
+		<input type='hidden' name="time" value={{=time}} />
+		<tr>
+			<input type='hidden' name="wu" value="吴旭" />
+			<td>吴</td>			
+			<td style="width:200px">
+				<input name="status_wu" id="status_wu1" type="radio" value="0"  /> 到了
+				<input name="status_wu" id="status_wu2" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_wu" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_wu" style="width:200px"  value='' />
+			</td>
+		</tr>
+		<tr>
+		<input type='hidden' name="luo" value="罗赛" />
+			<td>罗</td>
+			<td>
+				<input name="status_luo" type="radio" value="0" /> 到了
+				<input name="status_luo" type="radio" value="1"/> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_luo" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_luo" style="width:200px"  value='' />
+			</td>
+		</tr>
+		<tr>
+		<input type='hidden' name="liu" value="刘文昭" />
+			<td>刘</td>
+			<td>
+				<input name="status_liu" type="radio" value="0" /> 到了
+				<input name="status_liu" type="radio" value="1"/> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_liu" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_liu" style="width:200px"  value='' />
+			</td>
+		</tr>
+		<tr>
+		<input type='hidden' name="yao" value="姚润程" />
+			<td>姚</td>
+			<td>
+				<input name="status_yao" type="radio" value="0"/> 到了
+				<input name="status_yao" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_yao" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_yao" style="width:200px"  value='' />
+			</td>
+		</tr>
+		<tr>
+		<input type='hidden' name="long" value="龙吉源" />
+			<td>龙</td>
+			<td>
+				<input name="status_long1" type="radio" value="0"/> 到了
+				<input name="status_long1" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_long" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_long" style="width:200px"  value='' />
+			</td>
+		</tr>
+		<tr>
+		<input type='hidden' name="xue" value="薛承怡" />
+			<td>薛</td>
+			<td>
+				<input name="status_xue" type="radio" value="0" /> 到了
+				<input name="status_xue" type="radio" value="1" /> 没到 
+			</td>
+			<td>
+				<input type='text' name="time_xue" style="width:100px"  value='' />
+			</td>
+			<td>
+				<input type='text' name="abs_xue" style="width:200px"  value='' />
+			</td>
+		</tr>
+		<tr >
+			<td colspan="4">
+				<input type='submit'  value="提交今日签到" />
+			</td>
+		</tr>
+		</form>
+	</table>
+</div>
+<div id='show'></div>
+
+<script>
+jQuery('#sign_form').submit(function() {
+  ajax('{{=URL('commit')}}',
+       ['time','wu','luo','liu','yao','long','xue','status_liu','status_wu','status_luo','status_yao','status_long1','status_xue','time_xue','abs_xue','time_wu','abs_wu','time_luo','abs_luo','time_liu','abs_liu','time_yao','abs_yao','time_long','abs_long'], 'show');
+  return false;
+});
+{{pass}}
+</script>
+<h5>{{=XML(T('%s', A('查看过去签到情况',_href=URL('ss','sign','show.html'))))}}</h5>
